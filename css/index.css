@@ -1,0 +1,39 @@
+html,
+body {
+  height: 100%;
+  margin: 0
+}
+
+.win-h2{
+	display: inline;
+}
+
+.flexbox{
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+}
+
+.header{
+	background: #49D;
+	padding: 20px;
+	flex: 0 1 auto;
+}
+
+.mainbody{
+	background: #333;
+	padding: 20px;
+	flex: 1 1 auto;
+}
+
+.bodycontent{
+	position: absolute;              
+   top: 50%;                     
+   transform: translate(0, -50%)
+}
+
+.send{
+	background: #06A;
+	padding: 20px;
+	flex: 0 1 auto;
+}
