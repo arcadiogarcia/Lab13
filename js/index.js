@@ -47,7 +47,7 @@ WinJS.Application.onready = function () {
        button.style.margin="10%";
        document.querySelector("#sendactions").appendChild(button);
        
-       button.addEventListener("click",function(){
+       button.addEventListener("click",function(e){
            if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
