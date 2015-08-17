@@ -114,7 +114,7 @@ if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined' &&  type
   // Get a reference to the App Title Bar 
    Windows.UI.ViewManagement.ApplicationView.getForCurrentView().title="";
      var appTitleBar = Windows.UI.ViewManagement.ApplicationView.getForCurrentView().titleBar; 
-appTitleBar.ExtendViewIntoTitleBar = true;
+appTitleBar.extendViewIntoTitleBar = true;
  
        appTitleBar.foregroundColor = {r:255,g:255,b:255,a:0} ;
      appTitleBar.backgroundColor =  {r:68,g:153,b:221,a:0} ;
