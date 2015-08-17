@@ -51,8 +51,8 @@ WinJS.Application.onready = function () {
            if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
-                var date = document.getElementById("divControlDate").winControl;
-                var time = document.getElementById("divControlTime").winControl;
+                var date = document.getElementById("divControlDate").winControl.current;
+                var time = document.getElementById("divControlTime").winControl.current;
                 appointment.startTime=date;
                 appointment.startTime.setMinutes(time.getMinutes());
                 appointment.startTime.setHours(time.getHours());
