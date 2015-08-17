@@ -20,6 +20,29 @@ WinJS.Application.onready = function () {
     document.querySelector("#pickSomeone").addEventListener("click", pickContact, false);
     
     WinJS.UI.processAll();
+    
+    var sending=false;
+    
+    document.querySelector("#send").addEventListener("click",function(){
+        console.log(sending);
+        if(sending){
+            clickback();
+        }else{
+            clicksend();
+        }
+    });
+    
+    function clicksend(){
+       document.querySelector("#sendbox").style.height=window.innerHeight+"px";
+       document.querySelector("#send").innerHTML="Atras";
+       sending=true;
+    }
+    
+    function clickback(){
+       document.querySelector("#sendbox").style.height="50px";
+       document.querySelector("#send").innerHTML="Enviar";
+       sending=false;
+    }
 };
 
 WinJS.Application.start();

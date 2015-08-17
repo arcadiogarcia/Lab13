@@ -18,6 +18,8 @@ body {
 	background: #49D;
 	padding: 20px;
 	flex: 0 1 auto;
+	animation-name: appeartop;
+    animation-duration: 1s;
 }
 
 .mainbody{
@@ -29,11 +31,29 @@ body {
 .bodycontent{
 	position: absolute;              
    top: 50%;                     
-   transform: translate(0, -50%)
+   transform: translate(0, -50%);
+   	animation-name: appearalpha;
+    animation-duration: 2s;
+	z-index: 1;
 }
 
 .send{
 	background: #06A;
 	padding: 20px;
 	flex: 0 1 auto;
+	transition: height 0.5s ease-out;
+	height:50px;
+	z-index: 5;
 }
+
+@keyframes appeartop {
+    from {margin-top:-100%}
+    to {margin-top:0px}
+ }
+ 
+ 
+ @keyframes appearalpha {
+    0% {opacity: 0}
+	50% {opacity: 0; margin-left:-30px}
+    100% {opacity:1;margin-left:0px}
+ }
