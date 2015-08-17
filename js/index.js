@@ -35,13 +35,62 @@ WinJS.Application.onready = function () {
     function clicksend(){
        document.querySelector("#sendbox").style.height=window.innerHeight+"px";
        document.querySelector("#send").innerHTML="Atras";
+       
+       
+       var button=document.createElement("button");
+       button.className="appearbutton win-button action";
+       button.id="addCalendar";
+       button.innerHTML="Añadir al calendario";
+       button.style.width="80%";
+       button.style.height="40%";
+       button.style.display="block";
+       button.style.margin="10%";
+       document.querySelector("#sendactions").appendChild(button);
+       
+       button.addEventListener("click",function(){
+           if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
+                // Create an Appointment that should be added the user's appointments provider app.
+                var appointment = new Windows.ApplicationModel.Appointments.Appointment();
+                // Get the selection rect of the button pressed to add this appointment
+                var boundingRect = e.srcElement.getBoundingClientRect();
+                var selectionRect = { x: boundingRect.left, y: boundingRect.top, width: boundingRect.width, height: boundingRect.height };
+                // ShowAddAppointmentAsync returns an appointment id if the appointment given was added to the user's calendar.
+                // This value should be stored in app data and roamed so that the appointment can be replaced or removed in the future.
+                // An empty string return value indicates that the user canceled the operation before the appointment was added.
+                Windows.ApplicationModel.Appointments.AppointmentManager.showAddAppointmentAsync(appointment, selectionRect, Windows.UI.Popups.Placement.default)
+                .done(function (appointmentId) {
+                    if (appointmentId) {
+                        document.querySelector("#addCalendar").innerHTML="Añadido a tu calendario!";
+                        document.querySelector("#addCalendar").style.background="#3F3";
+                    } else {
+                        //ERROR
+                    }
+                });
+            }
+       });
+       
+       
+       button=document.createElement("button");
+       button.className="appearbutton win-button action";
+       button.id="sendMail";
+       button.innerHTML="Enviar email";
+       button.style.width="80%";
+       button.style.height="40%";
+       button.style.display="block";
+       button.style.margin="10%";
+       document.querySelector("#sendactions").appendChild(button);
+       
        sending=true;
     }
     
     function clickback(){
        document.querySelector("#sendbox").style.height="50px";
        document.querySelector("#send").innerHTML="Enviar";
+       
+       document.querySelector("#sendactions").innerHTML="";
+       
        sending=false;
+       
     }
 };
 

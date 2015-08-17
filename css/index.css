@@ -34,7 +34,9 @@ body {
    transform: translate(0, -50%);
    	animation-name: appearalpha;
     animation-duration: 2s;
+	text-align: justify;
 	z-index: 1;
+	padding:30px;
 }
 
 .send{
@@ -44,6 +46,14 @@ body {
 	transition: height 0.5s ease-out;
 	height:50px;
 	z-index: 5;
+}
+
+
+
+.appearbutton{
+	position:relative;
+   	animation-name: appearbutton;
+    animation-duration: 1s;
 }
 
 @keyframes appeartop {
@@ -56,4 +66,9 @@ body {
     0% {opacity: 0}
 	50% {opacity: 0; margin-left:-30px}
     100% {opacity:1;margin-left:0px}
+ }
+ 
+ @keyframes appearbutton {
+    from {top:100px;opacity:0}
+    to {top:0px;opacity:1}
  }
