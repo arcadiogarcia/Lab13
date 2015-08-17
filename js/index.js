@@ -1,3 +1,9 @@
+//Global variables
+
+var location="";
+var subject="";
+var partner="";
+
 
 // Add your TypeScript or JavaScript here 
 
@@ -51,6 +57,9 @@ WinJS.Application.onready = function () {
            if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
+                appointment.subject="Practica de "+subject+" con "+partner.displayName;
+                appointment.details="Creado automáticamente por la app Lab13";
+                appointment.location=location;
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
                 appointment.startTime=date;
@@ -109,6 +118,7 @@ if(typeof Windows != 'undefined') {
   // Open the picker for the user to select a contact 
   picker.pickContactAsync().done(function (contact) { 
     if (contact !== null) { 
+        partner=contact;
       document.querySelector("#pickSomeone").innerText= contact.displayName; 
     } else { 
       return "No one";
@@ -134,8 +144,13 @@ function suggestionsRequestedHandlerSubject(eventObject) {
     }
 }
 
+function querySubmittedHandlerSubject(eventObject) {
+    subject = eventObject.detail.queryText;
+}
+
 WinJS.Namespace.define("Subjects", {
-    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerSubject)
+    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerSubject),
+    querySubmittedHandler: WinJS.UI.eventHandler(querySubmittedHandlerSubject)
 });
 
 var suggestionListPlace = ["Laboratorio 1","Laboratorio 2","Laboratorio 3"];
@@ -154,7 +169,7 @@ function suggestionsRequestedHandlerPlace(eventObject) {
 }
 
 function querySubmittedHandlerPlace(eventObject) {
-    document.querySelector("#placebox").getElementsByTagName("input")[0].value = eventObject.detail.queryText;
+    location = eventObject.detail.queryText;
 }
 
 WinJS.Namespace.define("Places", {
