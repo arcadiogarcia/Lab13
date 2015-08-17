@@ -1,6 +1,6 @@
 //Global variables
 
-var location="";
+var eventLocation="";
 var subject="";
 var partner="";
 
@@ -59,7 +59,7 @@ WinJS.Application.onready = function () {
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
                 appointment.subject="Practica de "+subject+" con "+partner.displayName;
                 appointment.details="Creado automáticamente por la app Lab13";
-                appointment.location=location;
+                appointment.location=eventLocation;
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
                 appointment.startTime=date;
@@ -169,7 +169,7 @@ function suggestionsRequestedHandlerPlace(eventObject) {
 }
 
 function querySubmittedHandlerPlace(eventObject) {
-    location = eventObject.detail.queryText;
+    eventLocation = eventObject.detail.queryText;
 }
 
 WinJS.Namespace.define("Places", {
