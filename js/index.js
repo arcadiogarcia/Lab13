@@ -1,7 +1,3 @@
-//Global variables
-
-var eventLocation="";
-var subject="";
 var partner="";
 
 
@@ -57,9 +53,9 @@ WinJS.Application.onready = function () {
            if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
-                appointment.subject="Practica de "+subject+" con "+partner.displayName;
+                appointment.subject="Practica de "+document.querySelector("#subjectbox").getElementsByTagName("input")[0].value;+" con "+partner.displayName;
                 appointment.details="Creado automáticamente por la app Lab13";
-                appointment.location=eventLocation;
+                appointment.location=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
                 appointment.startTime=date;
@@ -144,13 +140,9 @@ function suggestionsRequestedHandlerSubject(eventObject) {
     }
 }
 
-function querySubmittedHandlerSubject(eventObject) {
-    subject = eventObject.detail.queryText;
-}
 
 WinJS.Namespace.define("Subjects", {
-    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerSubject),
-    querySubmittedHandler: WinJS.UI.eventHandler(querySubmittedHandlerSubject)
+    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerSubject)
 });
 
 var suggestionListPlace = ["Laboratorio 1","Laboratorio 2","Laboratorio 3"];
@@ -168,13 +160,8 @@ function suggestionsRequestedHandlerPlace(eventObject) {
     }
 }
 
-function querySubmittedHandlerPlace(eventObject) {
-    eventLocation = eventObject.detail.queryText;
-}
-
 WinJS.Namespace.define("Places", {
-    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerPlace),
-    querySubmittedHandler: WinJS.UI.eventHandler(querySubmittedHandlerPlace)
+    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerPlace)
 });
 
 
