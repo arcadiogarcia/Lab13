@@ -53,7 +53,7 @@ WinJS.Application.onready = function () {
            if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
-                appointment.subject="Practica de "+document.querySelector("#subjectbox").getElementsByTagName("input")[0].value;+" con "+partner.displayName;
+                appointment.subject="Practica de "+document.querySelector("#subjectbox").getElementsByTagName("input")[0].value+" con "+partner.displayName;
                 appointment.details="Creado automáticamente por la app Lab13";
                 appointment.location=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
                 var date = document.getElementById("divControlDate").winControl.current;
@@ -89,6 +89,21 @@ WinJS.Application.onready = function () {
        button.style.display="block";
        button.style.margin="10%";
        document.querySelector("#sendactions").appendChild(button);
+       
+       button.addEventListener("click",function(e){
+           if(partner.email&&partner.email.length>0){
+                var date = document.getElementById("divControlDate").winControl.current;
+                var time = document.getElementById("divControlTime").winControl.current;
+                var subject=document.querySelector("#subjectbox").getElementsByTagName("input")[0].value;
+                var place=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
+                var mailto="mailto:"+partner.emails[0]+"?subject=Practica de "+subject+"&body=";
+                mailto+="Hola "+partner.displayName+",\n\n";
+                mailto+="¿Que te parece si quedamos el dia "+date.toLocaleDateString()+" a las "+time.toLocaleTimeString();
+                mailto+=" en " + place + " para hacer la practica de "+subject+"?";
+                mailto+="\n\n\n Email generado automaticamente por Lab13";
+                document.location=mailto;    
+           }
+       });
        
        sending=true;
     }
