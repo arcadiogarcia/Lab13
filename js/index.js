@@ -12,13 +12,14 @@ WinJS.Application.onready = function () {
      // Create a JavaScript date object for date September 1, 1990.
     // Note, JavaScript months are 0 based so September is referenced by 8, not 9
     var initialDate = new Date(2015, 29, 8, 12, 0, 0, 0);
+    var currentDate = new Date();
     var divControlTime = document.querySelector("#divControlTime");
     var divControlDate = document.querySelector("#divControlDate");
     // Create a new TimePicker control with value of initialDate inside element "myTimePickerDiv"
     var controlTime = new WinJS.UI.TimePicker(divControlTime, { current: initialDate });
 
     // Create a new DatePicker control with value of initialDate inside element "myDatePickerDiv"
-    var controlDate = new WinJS.UI.DatePicker(divControlDate, { current: initialDate });
+    var controlDate = new WinJS.UI.DatePicker(divControlDate, { current: currentDate });
     document.querySelector("#pickSomeone").addEventListener("click", pickContact, false);
     
     WinJS.UI.processAll();
