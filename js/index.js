@@ -91,12 +91,12 @@ WinJS.Application.onready = function () {
        document.querySelector("#sendactions").appendChild(button);
        
        button.addEventListener("click",function(e){
-           if(partner.email&&partner.email.length>0){
+           if(partner.emails&&partner.emails.length>0){
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
                 var subject=document.querySelector("#subjectbox").getElementsByTagName("input")[0].value;
                 var place=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
-                var mailto="mailto:"+partner.emails[0]+"?subject=Practica de "+subject+"&body=";
+                var mailto="mailto:"+partner.emails[0].address+"?subject=Practica de "+subject+"&body=";
                 mailto+="Hola "+partner.displayName+",\n\n";
                 mailto+="¿Que te parece si quedamos el dia "+date.toLocaleDateString()+" a las "+time.toLocaleTimeString();
                 mailto+=" en " + place + " para hacer la practica de "+subject+"?";
