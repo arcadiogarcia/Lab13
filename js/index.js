@@ -96,11 +96,11 @@ WinJS.Application.onready = function () {
                 var time = document.getElementById("divControlTime").winControl.current;
                 var subject=document.querySelector("#subjectbox").getElementsByTagName("input")[0].value;
                 var place=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
-                var mailto="mailto:"+partner.emails[0].address+"?subject=Practica de "+subject+"&body=";
-                mailto+="Hola "+partner.displayName+",\n\n";
-                mailto+="¿Que te parece si quedamos el dia "+date.toLocaleDateString()+" a las "+time.toLocaleTimeString();
-                mailto+=" en " + place + " para hacer la practica de "+subject+"?";
-                mailto+="\n\n\n Email generado automaticamente por Lab13";
+                var mailto="mailto:"+partner.emails[0].address+"?subject=Practica%20de%20"+subject+"&body=";
+                mailto+="Hola%20"+partner.displayName+",%0A%0A";
+                mailto+="¿Que%20te%20parece%20si%20quedamos%20el%20dia%20"+date.toLocaleDateString()+"%20a%20las%20"+time.toLocaleTimeString();
+                mailto+="%20en%20" + place + "%20para%20hacer%20la%20practica%20de%20"+subject+"?";
+                mailto+="%0A%0A%0AEmail%20generado%20automaticamente%20por%20Lab13";
                 document.location=mailto;    
            }
        });
