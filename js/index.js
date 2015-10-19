@@ -60,9 +60,9 @@ WinJS.Application.onready = function () {
            if(typeof Windows != 'undefined' ) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
-                appointment.subject="Practica de "+document.querySelector("#subjectbox").getElementsByTagName("input")[0].value+" con "+partner.displayName;
+                appointment.subject="Practica de "+document.querySelector("#subjectbox").value+" con "+partner.displayName;
                 appointment.details="Creado automáticamente por la app Lab13";
-                appointment.location=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
+                appointment.location=document.querySelector("#placebox").value;
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
                 appointment.startTime=date;
