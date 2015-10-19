@@ -57,7 +57,7 @@ WinJS.Application.onready = function () {
        document.querySelector("#sendactions").appendChild(button);
        
        button.addEventListener("click",function(e){
-           if(typeof Windows != 'undefined' && typeof Windows.ApplicationModel!= 'undefined'  && typeof Windows.ApplicationModel.Appointments!= 'undefined' ) {
+           if(typeof Windows != 'undefined' ) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
                 appointment.subject="Practica de "+document.querySelector("#subjectbox").getElementsByTagName("input")[0].value+" con "+partner.displayName;
@@ -80,7 +80,8 @@ WinJS.Application.onready = function () {
                         document.querySelector("#addCalendar").innerHTML="Añadido a tu calendario!";
                         document.querySelector("#addCalendar").style.background="#3F3";
                     } else {
-                        //ERROR
+                        document.querySelector("#addCalendar").innerHTML="Error añadiendo al calendario!";
+                        document.querySelector("#addCalendar").style.background="#F00";
                     }
                 });
             }else{
