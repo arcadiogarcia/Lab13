@@ -103,7 +103,7 @@ WinJS.Application.onready = function () {
            if(typeof Windows != 'undefined') {
                //Nothing to do
            }else{
-               partner={emails:[document.getElementById("altEmail").value],displayName:document.getElementById("altName").value};
+               partner={emails:[ addess:document.getElementById("altEmail").value}],displayName:document.getElementById("altName").value};
            }
            if(partner.emails&&partner.emails.length>0){
                 var date = document.getElementById("divControlDate").winControl.current;
