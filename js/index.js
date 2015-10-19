@@ -57,7 +57,7 @@ WinJS.Application.onready = function () {
        document.querySelector("#sendactions").appendChild(button);
        
        button.addEventListener("click",function(e){
-           if(Windows && Windows.ApplicationModel && Windows.ApplicationModel.Appointments) {
+           if(typeof Windows != 'undefined' && typeof Windows.ApplicationModel!= 'undefined'  && typeof Windows.ApplicationModel.Appointments!= 'undefined' ) {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
                 appointment.subject="Practica de "+document.querySelector("#subjectbox").getElementsByTagName("input")[0].value+" con "+partner.displayName;
@@ -108,8 +108,8 @@ WinJS.Application.onready = function () {
            if(partner.emails&&partner.emails.length>0){
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
-                var subject=document.querySelector("#subjectbox").getElementsByTagName("input")[0].value;
-                var place=document.querySelector("#placebox").getElementsByTagName("input")[0].value;
+                var subject=document.querySelector("#subjectbox").value;
+                var place=document.querySelector("#placebox").value;
                 var mailto="mailto:"+partner.emails[0].address+"?subject=Practica%20de%20"+subject+"&body=";
                 mailto+="Hola%20"+partner.displayName+",%0A%0A";
                 mailto+="¿Que%20te%20parece%20si%20quedamos%20el%20dia%20"+date.toLocaleDateString()+"%20a%20las%20"+time.toLocaleTimeString();
