@@ -77,6 +77,8 @@ WinJS.Application.onready = function () {
                         //ERROR
                     }
                 });
+            }else{
+                window.alert("This functionality is only available in the Windows 10 app.")
             }
        });
        
@@ -102,7 +104,7 @@ WinJS.Application.onready = function () {
                 mailto+="¿Que%20te%20parece%20si%20quedamos%20el%20dia%20"+date.toLocaleDateString()+"%20a%20las%20"+time.toLocaleTimeString();
                 mailto+="%20en%20" + place + "%20para%20hacer%20la%20practica%20de%20"+subject+"?";
                 mailto+="%0A%0A%0AEmail%20generado%20automaticamente%20por%20Lab13";
-                document.location=mailto;    
+                window.location=mailto;    
            }
        });
        
