@@ -6,10 +6,10 @@ var partner="";
 WinJS.Application.onready = function () {
 
     if(typeof Windows != 'undefined') {
-        document.getElementsByTagId("altName").style.display="none";
-        document.getElementsByTagId("altEmail").style.display="none";
+        document.getElementByTagId("altName").style.display="none";
+        document.getElementByTagId("altEmail").style.display="none";
     }else{
-        document.getElementsByTagId("pickSomeone").style.display="none";
+        document.getElementByTagId("pickSomeone").style.display="none";
     }
     // The next line will apply declarative control binding to all elements
     // (e.g. DIV with attribute: data-win-control="WinJS.UI.Rating")
