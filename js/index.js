@@ -5,6 +5,12 @@ var partner="";
 
 WinJS.Application.onready = function () {
 
+    if(typeof Windows != 'undefined') {
+        document.getElementsByTagName("altName").style.display="none";
+        document.getElementsByTagName("altEmail").style.display="none";
+    }else{
+        document.getElementsByTagName("pickSomeone").style.display="none";
+    }
     // The next line will apply declarative control binding to all elements
     // (e.g. DIV with attribute: data-win-control="WinJS.UI.Rating")
     
@@ -94,6 +100,11 @@ WinJS.Application.onready = function () {
        document.querySelector("#sendactions").appendChild(button);
        
        button.addEventListener("click",function(e){
+           if(typeof Windows != 'undefined') {
+               //Nothing to do
+           }else{
+               partner={emails:[document.getElementById("altEmail").value],displayName:document.getElementById("altName").value};
+           }
            if(partner.emails&&partner.emails.length>0){
                 var date = document.getElementById("divControlDate").winControl.current;
                 var time = document.getElementById("divControlTime").winControl.current;
