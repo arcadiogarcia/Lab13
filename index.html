@@ -1,38 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Lab13</title>
-		<link href="winjs/css/ui-dark.css" rel="stylesheet" />
-		<link href="css/index.css" rel="stylesheet" />
- 		<script src="winjs/js/base.js"></script>
- 		<script src="winjs/js/ui.js"></script> 
-		<script src="js/index.js"></script> 
-		<meta name="msapplication-cortanavcd" content="xml/cortana.xml"/>
-	</head>
-	<body>
-		<div class="flexbox">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Lab13</title>
+	<link href="winjs/css/ui-dark.css" rel="stylesheet" />
+	<link href="css/index.css" rel="stylesheet" />
+	<script src="winjs/js/base.js"></script>
+	<script src="winjs/js/ui.js"></script>
+	<script src="js/index.js"></script>
+	<meta name="msapplication-cortanavcd" content="xml/cortana.xml" />
+</head>
+
+<body>
+	<datalist id="subjects">
+		<option value="Algebra"/>
+		<option value="Calculo"/>
+		<option value="Programacion 1"/>
+	</datalist>
+	<datalist id="aulas">
+		<option value="Aula 1"/>
+		<option value="Laboratorio 1"/>
+		<option value="Laboratorio 2"/>
+	</datalist>
+	<div class="flexbox">
 		<div class="header">
-		<h1 class="win-h1">Lab13</h1>
+			<h1 class="win-h1">Lab13</h1>
 		</div>
 		<div class="mainbody">
 			<div class="bodycontent">
-		<h2 class="win-h2">Voy a quedar con </h2>
-		<button id="pickSomeone" class="win-button action">alguien</button>
-		<h2 class="win-h2"> para hacer una práctica de </h2>
-		<div id="subjectbox" data-win-control="WinJS.UI.AutoSuggestBox" data-win-options="{placeholderText: 'Escribe una asignatura',onsuggestionsrequested: Subjects.suggestionsRequestedHandler}" style="display:inline-block;"></div>
-		<h2 class="win-h2"> el día </h2>
-		<div id="divControlDate"></div>
-		<h2 class="win-h2"> a las </h2>
-		<div id="divControlTime"></div>
-		<h2 class="win-h2"> en </h2>
-		<div id="placebox" data-win-control="WinJS.UI.AutoSuggestBox" data-win-options="{placeholderText: 'Escribe un lugar',onsuggestionsrequested: Places.suggestionsRequestedHandler}" style="display:inline-block;"></div>
-		</div>
+				<h2 class="win-h2">Voy a quedar con </h2>
+				<button id="pickSomeone" class="win-button action">alguien</button>
+				<h2 class="win-h2"> para hacer una práctica de </h2>
+				<input id="subjectbox" list="subjects" style="display:inline-block;"></input>
+				<h2 class="win-h2"> el día </h2>
+				<div id="divControlDate"></div>
+				<h2 class="win-h2"> a las </h2>
+				<div id="divControlTime"></div>
+				<h2 class="win-h2"> en </h2>
+				<input id="placebox" list="aulas" style="display:inline-block;"></input>
+			</div>
 		</div>
 		<div class="send" id="sendbox">
-		<button class="win-button action" id="send" style="z-index:11;">Enviar</button>
-		<div id="sendactions"></div>
+			<button class="win-button action" id="send" style="z-index:11;">Enviar</button>
+			<div id="sendactions"></div>
 		</div>
-    </div>
-	</body>
+	</div>
+</body>
+
 </html>

@@ -141,47 +141,6 @@ if(typeof Windows != 'undefined') {
 
 
 
-var suggestionListSubject = ["Algebra","Calculo"];
-
-function suggestionsRequestedHandlerSubject(eventObject) {
-    var queryText = eventObject.detail.queryText,
-    query = queryText.toLowerCase(),
-    suggestionCollection = eventObject.detail.searchSuggestionCollection;
-    if (queryText.length > 0) {
-        for (var i = 0, len = suggestionListSubject.length; i < len; i++) {
-            if (suggestionListSubject[i].substr(0, query.length).toLowerCase() === query) {
-                suggestionCollection.appendQuerySuggestion(suggestionListSubject[i]);
-            }
-        }
-    }
-}
-
-
-WinJS.Namespace.define("Subjects", {
-    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerSubject)
-});
-
-var suggestionListPlace = ["Laboratorio 1","Laboratorio 2","Laboratorio 3"];
-
-function suggestionsRequestedHandlerPlace(eventObject) {
-    var queryText = eventObject.detail.queryText,
-    query = queryText.toLowerCase(),
-    suggestionCollection = eventObject.detail.searchSuggestionCollection;
-    if (queryText.length > 0) {
-        for (var i = 0, len = suggestionListPlace.length; i < len; i++) {
-            if (suggestionListPlace[i].substr(0, query.length).toLowerCase() === query) {
-                suggestionCollection.appendQuerySuggestion(suggestionListPlace[i]);
-            }
-        }
-    }
-}
-
-WinJS.Namespace.define("Places", {
-    suggestionsRequestedHandler: WinJS.UI.eventHandler(suggestionsRequestedHandlerPlace)
-});
-
-
-
 if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined' &&  typeof Windows.UI.ViewManagement !== 'undefined') { 
   // Get a reference to the App Title Bar 
    Windows.UI.ViewManagement.ApplicationView.getForCurrentView().title="";
