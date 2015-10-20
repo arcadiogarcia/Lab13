@@ -44,6 +44,19 @@ WinJS.Application.onready = function () {
     function clicksend() {
         document.querySelector("#sendbox").style.height = window.innerHeight + "px";
         document.querySelector("#send").innerHTML = "Atras";
+        
+         button = document.createElement("button");
+        button.className = "appearbutton win-button action";
+        button.id = "pinStart";
+        button.innerHTML = "Anclar a Inicio";
+        button.style.width = "80%";
+        button.style.height = "40%";
+        button.style.display = "block";
+        button.style.margin = "10%";
+        document.querySelector("#sendactions").appendChild(button);
+        
+        button.addEventListener("click",pinLiveTile());
+
 
 
         var button = document.createElement("button");
@@ -174,18 +187,23 @@ function pinLiveTile() {
         var template = notifications.TileTemplateType.tileWide310x150BlockAndText02;
         var tileXml = notifications.TileUpdateManager.getTemplateContent(template);
 
+        var date = document.getElementById("divControlDate").winControl.current;
+        var time = document.getElementById("divControlTime").winControl.current;
+        var subject = document.querySelector("#subjectbox").value;
+        var place = document.querySelector("#placebox").value;
+        var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
         var tileTextAttributes = tileXml.getElementsByTagName("text");
-        tileTextAttributes[0].appendChild(tileXml.createTextNode("Practica de X"));
-        tileTextAttributes[1].appendChild(tileXml.createTextNode("21"));
-        tileTextAttributes[2].appendChild(tileXml.createTextNode("Octubre"));
+        tileTextAttributes[0].appendChild(tileXml.createTextNode("Práctica de " + subject + " con " + partner.displayName + " a las " + time.toLocaleTimeString() + " en " + place));
+        tileTextAttributes[1].appendChild(tileXml.createTextNode(date.getUTCDate()));
+        tileTextAttributes[2].appendChild(tileXml.createTextNode(monthNames[date.getMonth()]));
 
         var tileNotification = new notifications.TileNotification(tileXml);
 
-        var currentTime = new Date();
-        tileNotification.expirationTime = new Date(currentTime.getTime() + 600 * 1000);
+        tileNotification.expirationTime = new Date(date.getTime() + 3600 * 24);
 
         notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNotification);
     }
 }
-
-pinLiveTile();
