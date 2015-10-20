@@ -205,5 +205,8 @@ function pinLiveTile() {
         tileNotification.expirationTime = new Date(date.getTime() + 3600 * 24);
 
         notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNotification);
+        
+        document.querySelector("#pinStart").innerHTML = "Añadido a la Live Tile!";
+        document.querySelector("#pinStart").style.background = "#3F3";
     }
 }
