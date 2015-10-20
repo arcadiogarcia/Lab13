@@ -175,9 +175,9 @@ function pinLiveTile() {
         var tileXml = notifications.TileUpdateManager.getTemplateContent(template);
 
         var tileTextAttributes = tileXml.getElementsByTagName("text");
-        tileTextAttributes[0].appendChild(tileXml.createTextNode("Hello World! My very own tile notification"));
-        tileTextAttributes[0].appendChild(tileXml.createTextNode("Date"));
-        tileTextAttributes[0].appendChild(tileXml.createTextNode("Bla bla bla"));
+        tileTextAttributes[0].appendChild(tileXml.createTextNode("Practica de X"));
+        tileTextAttributes[1].appendChild(tileXml.createTextNode("21"));
+        tileTextAttributes[2].appendChild(tileXml.createTextNode("Octubre"));
 
         var tileNotification = new notifications.TileNotification(tileXml);
 
