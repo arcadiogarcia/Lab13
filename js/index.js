@@ -53,6 +53,8 @@ WinJS.Application.onready = function () {
         button.style.height = "40%";
         button.style.display = "block";
         button.style.margin = "10%";
+        button.style["margin-top"] = "50px";
+        button.style["margin-bottom"] = "10px";
         document.querySelector("#sendactions").appendChild(button);
         
         button.addEventListener("click",pinLiveTile);
@@ -67,6 +69,8 @@ WinJS.Application.onready = function () {
         button.style.height = "40%";
         button.style.display = "block";
         button.style.margin = "10%";
+        button.style["margin-top"] = "50px";
+        button.style["margin-bottom"] = "10px";
         document.querySelector("#sendactions").appendChild(button);
 
         button.addEventListener("click", function (e) {
@@ -111,6 +115,8 @@ WinJS.Application.onready = function () {
         button.style.height = "40%";
         button.style.display = "block";
         button.style.margin = "10%";
+        button.style["margin-top"] = "50px";
+        button.style["margin-bottom"] = "10px";
         document.querySelector("#sendactions").appendChild(button);
 
         button.addEventListener("click", function (e) {
