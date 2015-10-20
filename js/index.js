@@ -55,7 +55,7 @@ WinJS.Application.onready = function () {
         button.style.margin = "10%";
         document.querySelector("#sendactions").appendChild(button);
         
-        button.addEventListener("click",pinLiveTile());
+        button.addEventListener("click",pinLiveTile);
 
 
 
