@@ -176,6 +176,8 @@ function pinLiveTile() {
 
         var tileTextAttributes = tileXml.getElementsByTagName("text");
         tileTextAttributes[0].appendChild(tileXml.createTextNode("Hello World! My very own tile notification"));
+        tileTextAttributes[0].appendChild(tileXml.createTextNode("Date"));
+        tileTextAttributes[0].appendChild(tileXml.createTextNode("Bla bla bla"));
 
         var tileNotification = new notifications.TileNotification(tileXml);
 
