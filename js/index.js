@@ -171,7 +171,7 @@ function pinLiveTile() {
     if (typeof Windows !== 'undefined') {
         var notifications = Windows.UI.Notifications;
 
-        var template = notifications.TileTemplateType.TileWide310x150BlockAndText02;
+        var template = notifications.TileTemplateType.tileWide310x150BlockAndText02;
         var tileXml = notifications.TileUpdateManager.getTemplateContent(template);
 
         var tileTextAttributes = tileXml.getElementsByTagName("text");
