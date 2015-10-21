@@ -13,6 +13,16 @@
 </head>
 
 <body>
+	<datalist id="subjects">
+		<option value="Algebra"/>
+		<option value="Calculo"/>
+		<option value="Programacion 1"/>
+	</datalist>
+	<datalist id="aulas">
+		<option value="Aula 1"/>
+		<option value="Laboratorio 1"/>
+		<option value="Laboratorio 2"/>
+	</datalist>
 	<div class="flexbox">
 		<div class="header">
 			<h1 class="win-h1">Lab13</h1>
@@ -24,13 +34,13 @@
 				<input id="altName" class="win-textbox" type="text" value="nombre"/>
 				<input id="altEmail" class="win-textbox" type="email" value="email"/>
 				<h2 class="win-h2"> para hacer una práctica de </h2>
-				<input id="subjectbox" type="text" style="display:inline-block;" style="win-textbox"/>
+				<input id="subjectbox" type="text"  list="subjects" style="display:inline-block;" class="win-textbox"/>
 				<h2 class="win-h2"> el día </h2>
 				<div id="divControlDate"></div>
 				<h2 class="win-h2"> a las </h2>
 				<div id="divControlTime"></div>
 				<h2 class="win-h2"> en </h2>
-				<input id="placebox" type="text" style="display:inline-block;"  style="win-textbox"/>
+				<input id="placebox" type="text" list="aulas" style="display:inline-block;"  class="win-textbox"/>
 			</div>
 		</div>
 		<div class="send" id="sendbox">
