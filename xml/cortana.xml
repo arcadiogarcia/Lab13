@@ -2,11 +2,11 @@
 <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
   <CommandSet xml:lang="en-us" Name="Lab13CommandSet_en-us">
     <CommandPrefix></CommandPrefix>
-    <Example> I'm going to meet with Arcadio to work on Algebra august 3th at 3 PM in Lab 1 </Example>
+    <Example> I'm going to work on Algebra at Lab 1 </Example>
 
     <Command Name="nuevaPractica">
-      <Example> I'm going to meet with Arcadio to work on Algebra august 3th at 3 PM in Lab 1 </Example>
-      <ListenFor> I'm going to meet with {persona} to work on {asignatura} [the] {fecha} [in] {lugar} </ListenFor>
+      <Example> I'm going to work on Algebra at Lab 1  </Example>
+      <ListenFor> I'm going to work on {asignatura} at {lugar} </ListenFor>
       <Feedback> Planning the {asignatura} assignment </Feedback>
       <Navigate/>
     </Command>

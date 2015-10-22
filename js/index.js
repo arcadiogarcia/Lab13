@@ -153,6 +153,36 @@ WinJS.Application.onready = function () {
     }
 };
 
+function activated(eventObject) {
+    var activationKind = eventObject.detail.kind;
+    var activatedEventArgs = eventObject.detail.detail;
+    var p = WinJS.UI.processAll().then(function () {
+                    if (activationKind == Windows.ApplicationModel.Activation.ActivationKind.voiceCommand) {
+                        // When directly launched via VCD, activation is via the VoiceCommand ActivationKind.
+                        // Using the "
+                        var speechRecognitionResult = activatedEventArgs[0].result;
+                        var voiceCommandName = speechRecognitionResult.rulePath[0];
+                        switch (voiceCommandName) {
+                            case "nuevaPractica":
+                                var asignatura = speechRecognitionResult.semanticInterpretation.properties["asignatura"][0];
+                                var lugar = speechRecognitionResult.semanticInterpretation.properties["lugar"][0];
+                                document.getElementById("subjectbox").value=asignatura;
+                                document.getElementById("placebox").value=lugar;
+                                break;
+                            default:
+                                break;
+                        }
+                    } 
+                });
+        // Calling done on a promise chain allows unhandled exceptions to propagate.
+        p.done();
+        // Use setPromise to indicate to the system that the splash screen must not be torn down
+        // until after processAll and navigate complete asynchronously.
+        eventObject.setPromise(p);
+}
+
+
+WinJS.Application.addEventListener("activated", activated, false);
 WinJS.Application.start();
 
 function pickContact() {
