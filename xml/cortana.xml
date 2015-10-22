@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
-  <CommandSet xml:lang="es-es" Name="Lab13CommandSet_es-es">
+  <CommandSet xml:lang="en-us" Name="Lab13CommandSet_en-us">
     <CommandPrefix></CommandPrefix>
-    <Example> Voy a quedar con Arcadio para hacer una práctica de Algebra el 3 de agosto a las 12 en el laboratorio 1 </Example>
+    <Example> I'm going to meet with Arcadio to work on Algebra august 3th at 3 PM in Lab 1 </Example>
 
     <Command Name="nuevaPractica">
-      <Example> Voy a quedar con Arcadio para hacer una práctica de Algebra el 3 de agosto a las 12 en el laboratorio 13  </Example>
-      <ListenFor> Voy a quedar con {persona} para hacer una práctica de {asignatura} [el] {fecha} [en] {lugar} </ListenFor>
-      <Feedback> Planificando tu práctica de {asignatura} </Feedback>
+      <Example> I'm going to meet with Arcadio to work on Algebra august 3th at 3 PM in Lab 1 </Example>
+      <ListenFor> I'm going to meet with {persona} to work on {asignatura} [the] {fecha} [in] {lugar} </ListenFor>
+      <Feedback> Planning the {asignatura} assignment </Feedback>
       <Navigate/>
     </Command>
 
