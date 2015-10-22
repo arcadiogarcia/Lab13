@@ -1,20 +1,17 @@
+//Variable global guarra para el compañero
 var partner = "";
 
 
-// Add your TypeScript or JavaScript here 
-
 WinJS.Application.onready = function () {
-
+    //Contact picker o textbox dependiendo de si esta en una web o no
     if (typeof Windows != 'undefined') {
         document.getElementById("altName").style.display = "none";
         document.getElementById("altEmail").style.display = "none";
     } else {
         document.getElementById("pickSomeone").style.display = "none";
     }
-    // The next line will apply declarative control binding to all elements
-    // (e.g. DIV with attribute: data-win-control="WinJS.UI.Rating")
-    
-    
+
+
     // Create a JavaScript date object for date September 1, 1990.
     // Note, JavaScript months are 0 based so September is referenced by 8, not 9
     var initialDate = new Date(2015, 29, 8, 12, 0, 0, 0);
@@ -30,6 +27,7 @@ WinJS.Application.onready = function () {
 
     WinJS.UI.processAll();
 
+    //Esta desplegado el dialogo de send?
     var sending = false;
 
     document.querySelector("#send").addEventListener("click", function () {
@@ -153,6 +151,7 @@ WinJS.Application.onready = function () {
     }
 };
 
+//Cortana!
 function activated(eventObject) {
     var activationKind = eventObject.detail.kind;
     var activatedEventArgs = eventObject.detail.detail;
@@ -203,7 +202,7 @@ function pickContact() {
 }
 
 
-
+//Color de la titlebar
 if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined' && typeof Windows.UI.ViewManagement !== 'undefined') { 
     // Get a reference to the App Title Bar 
     Windows.UI.ViewManagement.ApplicationView.getForCurrentView().title = "";

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
   <CommandSet xml:lang="en-us" Name="Lab13CommandSet_en-us">
-    <CommandPrefix></CommandPrefix>
+    <CommandPrefix>Lab 13</CommandPrefix>
     <Example> I'm going to work on Algebra at Lab 1 </Example>
 
     <Command Name="nuevaPractica">
