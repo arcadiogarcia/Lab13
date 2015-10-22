@@ -42,8 +42,8 @@ WinJS.Application.onready = function () {
     function clicksend() {
         document.querySelector("#sendbox").style.height = window.innerHeight + "px";
         document.querySelector("#send").innerHTML = "Atras";
-        
-         button = document.createElement("button");
+
+        button = document.createElement("button");
         button.className = "appearbutton win-button action";
         button.id = "pinStart";
         button.innerHTML = "Anclar a Inicio";
@@ -54,8 +54,8 @@ WinJS.Application.onready = function () {
         button.style["margin-top"] = "50px";
         button.style["margin-bottom"] = "10px";
         document.querySelector("#sendactions").appendChild(button);
-        
-        button.addEventListener("click",pinLiveTile);
+
+        button.addEventListener("click", pinLiveTile);
 
 
 
@@ -152,34 +152,32 @@ WinJS.Application.onready = function () {
 };
 
 //Cortana!
-function activated(eventObject) {
-    var activationKind = eventObject.detail.kind;
-    var activatedEventArgs = eventObject.detail.detail;
-    var p = WinJS.UI.processAll().then(function () {
-                    if (activationKind == Windows.ApplicationModel.Activation.ActivationKind.voiceCommand) {
-                        // When directly launched via VCD, activation is via the VoiceCommand ActivationKind.
-                        // Using the "
-                        var speechRecognitionResult = activatedEventArgs[0].result;
-                        var voiceCommandName = speechRecognitionResult.rulePath[0];
-                        switch (voiceCommandName) {
-                            case "nuevaPractica":
-                                var asignatura = speechRecognitionResult.semanticInterpretation.properties["asignatura"][0];
-                                var lugar = speechRecognitionResult.semanticInterpretation.properties["lugar"][0];
-                                document.getElementById("subjectbox").value=asignatura;
-                                document.getElementById("placebox").value=lugar;
-                                break;
-                            default:
-                                break;
-                        }
-                    } 
-                });
-        // Calling done on a promise chain allows unhandled exceptions to propagate.
-        p.done();
-        // Use setPromise to indicate to the system that the splash screen must not be torn down
-        // until after processAll and navigate complete asynchronously.
-        eventObject.setPromise(p);
-}
+ if (typeof Windows !== 'undefined' && 
+    typeof Windows.UI !== 'undefined' && 
+    typeof Windows.ApplicationModel !== 'undefined') { 
 
+Windows.UI.WebUI.WebUIApplication.addEventListener("activated", function (args) {
+    var activation = Windows.ApplicationModel.Activation; 
+    // Check to see if the app was activated by a voice command 
+    if (args.kind === activation.ActivationKind.voiceCommand) { 
+
+        // When directly launched via VCD, activation is via the VoiceCommand ActivationKind.
+        // Using the "
+        var speechRecognitionResult = args.result;
+        var voiceCommandName = speechRecognitionResult.rulePath[0];
+        switch (voiceCommandName) {
+            case "nuevaPractica":
+                var asignatura = speechRecognitionResult.semanticInterpretation.properties["asignatura"][0];
+                var lugar = speechRecognitionResult.semanticInterpretation.properties["lugar"][0];
+                document.getElementById("subjectbox").value = asignatura;
+                document.getElementById("placebox").value = lugar;
+                break;
+            default:
+                break;
+        }
+    }
+});
+}
 
 WinJS.Application.addEventListener("activated", activated, false);
 WinJS.Application.start();
@@ -240,7 +238,7 @@ function pinLiveTile() {
         tileNotification.expirationTime = new Date(date.getTime() + 3600 * 24);
 
         notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNotification);
-        
+
         document.querySelector("#pinStart").innerHTML = "Añadido a la Live Tile!";
         document.querySelector("#pinStart").style.background = "#3F3";
     }

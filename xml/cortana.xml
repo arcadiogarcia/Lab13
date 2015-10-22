@@ -8,7 +8,7 @@
       <Example> I'm going to work on Algebra at Lab 1  </Example>
       <ListenFor> I'm going to work on {asignatura} at {lugar} </ListenFor>
       <Feedback> Planning the {asignatura} assignment </Feedback>
-      <Navigate/>
+      <Navigate Target="/index.html"/>
     </Command>
 
     <PhraseTopic Label="persona" Scenario="Form Filling">
