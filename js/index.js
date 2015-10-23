@@ -152,6 +152,7 @@ WinJS.Application.onready = function () {
 };
 
 //Cortana!
+//Leer https://gist.github.com/seksenov/17032e9a6eb9c17f88b5
  if (typeof Windows !== 'undefined' && 
     typeof Windows.UI !== 'undefined' && 
     typeof Windows.ApplicationModel !== 'undefined') { 
@@ -179,8 +180,7 @@ Windows.UI.WebUI.WebUIApplication.addEventListener("activated", function (args) 
 });
 }
 
-WinJS.Application.addEventListener("activated", activated, false);
-WinJS.Application.start();
+
 
 function pickContact() {
     if (typeof Windows != 'undefined') {
@@ -243,3 +243,5 @@ function pinLiveTile() {
         document.querySelector("#pinStart").style.background = "#3F3";
     }
 }
+
+WinJS.Application.start();
