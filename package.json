@@ -1,0 +1,25 @@
+{
+  "name": "Lab13",
+  "version": "0.0.0",
+  "description": "A W10 Hosted Web App to make lab appointments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arcadiogarcia/Lab13.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/arcadiogarcia/Lab13/issues"
+  },
+  "homepage": "https://github.com/arcadiogarcia/Lab13",
+  "dependencies": {
+    "express": "~4.13.4",
+    "body-parser": "~1.15.0",
+    "request": "~2.70.0",
+    "promise": "~7.1.1"
+  }
+}

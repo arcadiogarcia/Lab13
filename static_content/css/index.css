@@ -46,6 +46,7 @@ body {
 	transition: height 0.5s ease-out;
 	height:50px;
 	z-index: 5;
+    overflow-y: auto;
 }
 
 

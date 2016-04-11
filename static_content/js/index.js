@@ -2,7 +2,7 @@
 var partner = "";
 
 
-WinJS.Application.onready = function () {
+WinJS.Application.onready = function() {
     //Contact picker o textbox dependiendo de si esta en una web o no
     if (typeof Windows != 'undefined') {
         document.getElementById("altName").style.display = "none";
@@ -12,14 +12,12 @@ WinJS.Application.onready = function () {
     }
 
 
-    // Create a JavaScript date object for date September 1, 1990.
-    // Note, JavaScript months are 0 based so September is referenced by 8, not 9
-    var initialDate = new Date(2015, 29, 8, 12, 0, 0, 0);
+
     var currentDate = new Date();
     var divControlTime = document.querySelector("#divControlTime");
     var divControlDate = document.querySelector("#divControlDate");
     // Create a new TimePicker control with value of initialDate inside element "myTimePickerDiv"
-    var controlTime = new WinJS.UI.TimePicker(divControlTime, { current: initialDate });
+    var controlTime = new WinJS.UI.TimePicker(divControlTime, { current: currentDate });
 
     // Create a new DatePicker control with value of initialDate inside element "myDatePickerDiv"
     var controlDate = new WinJS.UI.DatePicker(divControlDate, { current: currentDate });
@@ -30,7 +28,7 @@ WinJS.Application.onready = function () {
     //Esta desplegado el dialogo de send?
     var sending = false;
 
-    document.querySelector("#send").addEventListener("click", function () {
+    document.querySelector("#send").addEventListener("click", function() {
         console.log(sending);
         if (sending) {
             clickback();
@@ -39,9 +37,107 @@ WinJS.Application.onready = function () {
         }
     });
 
+    document.querySelector("#findLab").addEventListener("click", function() {
+        console.log(sending);
+        if (sending) {
+            clickback();
+        } else {
+            clickfind();
+        }
+    });
+
+
+    function clickfind() {
+        document.querySelector("#sendbox").style.height = window.innerHeight + "px";
+        document.querySelector("#findLab").innerHTML = "Atras";
+        document.querySelector("#send").style.visibility = "hidden";
+
+        var date = document.getElementById("divControlDate").winControl.current;
+        var time = document.getElementById("divControlTime").winControl.current;
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', '/API/lab/' + date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + '/');
+        xhr.onreadystatechange = function() {
+            var DONE = 4; // readyState 4 means the request is done.
+            var OK = 200; // status 200 is a successful return.
+            if (xhr.readyState === DONE) {
+                if (xhr.status === OK) {
+                    var currentTimeSlot = time.getHours() + ":00-" + (time.getHours() + 1) + ":00";
+                    var reply = JSON.parse(xhr.responseText);
+                    // currentTimeSlot = "10:00-11:00" // For testing
+                    var freeLabs = [];
+                    for (var key in reply) {
+                        var count = 0;
+                        reply[key].forEach(function(x) {
+                            if (count > 0 || x.title.indexOf(currentTimeSlot) == 0) {
+                                if (x.available) {
+                                    count++;
+                                } else {
+                                    if (count > 0) {
+                                        freeLabs.push({ lab: key, freeHours: count });
+                                    }
+                                    count = NaN;
+                                }
+                            }
+                        });
+                        if (count > 0) {
+                            freeLabs.push({ lab: key, freeHours: count });
+                        }
+                    }
+                    freeLabs.sort(function(x, y) { return y.freeHours - x.freeHours; }).forEach(createLabOption);
+                    if (freeLabs.length == 0) {
+                        button = document.createElement("button");
+                        button.className = "appearbutton win-button action";
+
+                        button.style.width = "80%";
+                        button.style.height = "40%";
+                        button.style.display = "block";
+                        button.style.margin = "10%";
+                        button.style["text-align"] = "center";
+                        button.style["margin-top"] = "10px";
+                        button.style["margin-bottom"] = "10px";
+                        button.innerHTML = "No hay laboratorios libres a la hora indicada.";
+
+                        document.querySelector("#sendactions").appendChild(button);
+
+                        button.addEventListener("click", function() {
+                            clickback();
+                        });
+                    }
+                } else {
+                    alert('Error: ' + xhr.status); // An error occurred during the request.
+                }
+            }
+        };
+        xhr.send(null);
+            
+
+        function createLabOption(option) {
+            button = document.createElement("button");
+            button.className = "appearbutton win-button action";
+
+            button.style.width = "80%";
+            button.style.height = "40%";
+            button.style.display = "block";
+            button.style.margin = "10%";
+            button.style["text-align"] = "left";
+            button.style["margin-top"] = "10px";
+            button.style["margin-bottom"] = "10px";
+            button.innerHTML = "<h3 style='display:inline;margin-left:10%;'>" + option.lab + "</h3><div style='display:inline-block;float:right;margin-right:10%;'> Disponible " + option.freeHours + " horas, hasta las " + (time.getHours() + option.freeHours) + ":00</div>";
+
+            document.querySelector("#sendactions").appendChild(button);
+
+            button.addEventListener("click", function() {
+                document.querySelector("#placebox").value = option.lab;
+                clickback();
+            });
+        }
+        sending = true;
+    };
+
     function clicksend() {
         document.querySelector("#sendbox").style.height = window.innerHeight + "px";
-        document.querySelector("#send").innerHTML = "Atras";
+        document.querySelector("#findLab").innerHTML = "Atras";
+        document.querySelector("#send").style.visibility = "hidden";
 
         button = document.createElement("button");
         button.className = "appearbutton win-button action";
@@ -71,7 +167,7 @@ WinJS.Application.onready = function () {
         button.style["margin-bottom"] = "10px";
         document.querySelector("#sendactions").appendChild(button);
 
-        button.addEventListener("click", function (e) {
+        button.addEventListener("click", function(e) {
             if (typeof Windows != 'undefined') {
                 // Create an Appointment that should be added the user's appointments provider app.
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
@@ -90,7 +186,7 @@ WinJS.Application.onready = function () {
                 // This value should be stored in app data and roamed so that the appointment can be replaced or removed in the future.
                 // An empty string return value indicates that the user canceled the operation before the appointment was added.
                 Windows.ApplicationModel.Appointments.AppointmentManager.showAddAppointmentAsync(appointment, selectionRect, Windows.UI.Popups.Placement.default)
-                    .done(function (appointmentId) {
+                    .done(function(appointmentId) {
                         if (appointmentId) {
                             document.querySelector("#addCalendar").innerHTML = "Añadido a tu calendario!";
                             document.querySelector("#addCalendar").style.background = "#3F3";
@@ -117,7 +213,7 @@ WinJS.Application.onready = function () {
         button.style["margin-bottom"] = "10px";
         document.querySelector("#sendactions").appendChild(button);
 
-        button.addEventListener("click", function (e) {
+        button.addEventListener("click", function(e) {
             if (typeof Windows != 'undefined') {
                 //Nothing to do
             } else {
@@ -142,9 +238,11 @@ WinJS.Application.onready = function () {
 
     function clickback() {
         document.querySelector("#sendbox").style.height = "50px";
-        document.querySelector("#send").innerHTML = "Enviar";
+        document.querySelector("#findLab").innerHTML = "Encontrar laboratorios libres";
 
         document.querySelector("#sendactions").innerHTML = "";
+
+        document.querySelector("#send").style.visibility = "visible";
 
         sending = false;
 
@@ -153,31 +251,31 @@ WinJS.Application.onready = function () {
 
 //Cortana!
 //Leer https://gist.github.com/seksenov/17032e9a6eb9c17f88b5
- if (typeof Windows !== 'undefined' && 
-    typeof Windows.UI !== 'undefined' && 
-    typeof Windows.ApplicationModel !== 'undefined') { 
+if (typeof Windows !== 'undefined' &&
+    typeof Windows.UI !== 'undefined' &&
+    typeof Windows.ApplicationModel !== 'undefined') {
 
-Windows.UI.WebUI.WebUIApplication.addEventListener("activated", function (args) {
-    var activation = Windows.ApplicationModel.Activation; 
-    // Check to see if the app was activated by a voice command 
-    if (args.kind === activation.ActivationKind.voiceCommand) { 
+    Windows.UI.WebUI.WebUIApplication.addEventListener("activated", function(args) {
+        var activation = Windows.ApplicationModel.Activation;
+        // Check to see if the app was activated by a voice command 
+        if (args.kind === activation.ActivationKind.voiceCommand) {
 
-        // When directly launched via VCD, activation is via the VoiceCommand ActivationKind.
-        // Using the "
-        var speechRecognitionResult = args.result;
-        var voiceCommandName = speechRecognitionResult.rulePath[0];
-        switch (voiceCommandName) {
-            case "nuevaPractica":
-                var asignatura = speechRecognitionResult.semanticInterpretation.properties["asignatura"][0];
-                var lugar = speechRecognitionResult.semanticInterpretation.properties["lugar"][0];
-                document.getElementById("subjectbox").value = asignatura;
-                document.getElementById("placebox").value = lugar;
-                break;
-            default:
-                break;
+            // When directly launched via VCD, activation is via the VoiceCommand ActivationKind.
+            // Using the "
+            var speechRecognitionResult = args.result;
+            var voiceCommandName = speechRecognitionResult.rulePath[0];
+            switch (voiceCommandName) {
+                case "nuevaPractica":
+                    var asignatura = speechRecognitionResult.semanticInterpretation.properties["asignatura"][0];
+                    var lugar = speechRecognitionResult.semanticInterpretation.properties["lugar"][0];
+                    document.getElementById("subjectbox").value = asignatura;
+                    document.getElementById("placebox").value = lugar;
+                    break;
+                default:
+                    break;
+            }
         }
-    }
-});
+    });
 }
 
 
@@ -188,7 +286,7 @@ function pickContact() {
         var picker = new Windows.ApplicationModel.Contacts.ContactPicker();
         picker.desiredFieldsWithContactFieldType.append(Windows.ApplicationModel.Contacts.ContactFieldType.email);
         // Open the picker for the user to select a contact 
-        picker.pickContactAsync().done(function (contact) {
+        picker.pickContactAsync().done(function(contact) {
             if (contact !== null) {
                 partner = contact;
                 document.querySelector("#pickSomeone").innerText = contact.displayName;
@@ -201,7 +299,7 @@ function pickContact() {
 
 
 //Color de la titlebar
-if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined' && typeof Windows.UI.ViewManagement !== 'undefined') { 
+if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined' && typeof Windows.UI.ViewManagement !== 'undefined') {
     // Get a reference to the App Title Bar 
     Windows.UI.ViewManagement.ApplicationView.getForCurrentView().title = "";
     Windows.UI.ViewManagement.ApplicationViewTitleBar.ExtendViewIntoTitleBar = true;
